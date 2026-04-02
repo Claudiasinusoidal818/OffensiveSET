@@ -391,5 +391,3 @@ MIT
 ## Author
 
 **secfathy** — Offensive Security Researcher
-
-Built with Claude Code.
